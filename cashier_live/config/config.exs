@@ -59,7 +59,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :cors_plug,
-  origin: ["http://localhost:3001"],
+  origin: ["http://localhost:3000"],
   max_age: 86400
 
 # Import environment specific config. This must remain at the bottom

@@ -2,39 +2,38 @@ defmodule CashierLiveWeb.Router do
   use CashierLiveWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :put_root_layout, html: {CashierLiveWeb.Layouts, :root}
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_live_flash)
+    plug(:put_root_layout, html: {CashierLiveWeb.Layouts, :root})
+    plug(:protect_from_forgery)
   end
 
   pipeline :external do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_live_flash)
+    plug(:protect_from_forgery, allow_hosts: ["http://localhost:3000"])
+    plug(:put_secure_browser_headers)
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
   end
 
   scope "/", CashierLiveWeb do
-    pipe_through :external
+    pipe_through(:external)
 
     live_session :external do
-      live "/cashier", CashierLive, :index
+      live("/cashier", CashierLive, :index)
     end
   end
 
   # Other scopes may use custom stacks.
   scope "/api", CashierLiveWeb do
-    pipe_through :api
+    pipe_through(:api)
 
-    get "/token", PageController, :token
+    get("/token", PageController, :token)
   end
 
   # Enable LiveDashboard in development
@@ -47,12 +46,9 @@ defmodule CashierLiveWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/dev" do
-      pipe_through :browser
+      pipe_through(:browser)
 
-      live_dashboard "/dashboard", metrics: CashierLiveWeb.Telemetry
+      live_dashboard("/dashboard", metrics: CashierLiveWeb.Telemetry)
     end
-  end
-
-  def check_csrf_token(conn, opts) do
   end
 end

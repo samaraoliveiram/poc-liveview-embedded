@@ -8,7 +8,8 @@ defmodule CashierLiveWeb.Endpoint do
     store: :cookie,
     key: "_cashier_live_key",
     signing_salt: "/yN1ggjj",
-    same_site: "None"
+    same_site: "None",
+    secure: true
   ]
 
   socket "/live", Phoenix.LiveView.Socket,

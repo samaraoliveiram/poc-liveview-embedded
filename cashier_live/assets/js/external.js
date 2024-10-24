@@ -49,7 +49,7 @@ function insertEl(target, html) {
 
 function connectWebSocket() {
   let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-  console.log(csrfToken)
+  console.log({csrfToken})
 
   let liveSocket = new LiveSocket("ws://localhost:4000/live", Socket, {
   longPollFallbackMs: 2500,
