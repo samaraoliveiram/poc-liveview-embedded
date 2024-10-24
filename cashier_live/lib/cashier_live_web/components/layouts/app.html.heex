@@ -1,0 +1,5 @@
+  <link phx-track-static rel="stylesheet" href="http://localhost:4000/assets/app.css" />
+  <div class="mx-auto max-w-2xl" data_token={get_csrf_token()}>
+    <.flash_group flash={@flash} />
+    <%= @inner_content %>
+  </div>
